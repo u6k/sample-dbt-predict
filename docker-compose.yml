@@ -8,3 +8,16 @@ services:
     volumes:
       - .:/var/myapp
       - ./output:/var/output
+      - ./profiles.yml:/root/.dbt/profiles.yml
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    volumes:
+      - db_volume:/var/lib/postgresql
+    env_file: .env
+
+volumes:
+  db_volume:
+    #external: true
