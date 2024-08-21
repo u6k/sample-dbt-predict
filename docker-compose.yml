@@ -1,0 +1,24 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      - TZ=Asia/Tokyo
+    volumes:
+      - .:/var/myapp
+      - ./output:/var/output
+      - ./profiles.yml:/root/.dbt/profiles.yml
+    env_file: .env
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    volumes:
+      - db_volume:/var/lib/postgresql
+    env_file: .env
+
+volumes:
+  db_volume:
+    #external: true
