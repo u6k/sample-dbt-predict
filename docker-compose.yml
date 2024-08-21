@@ -9,6 +9,7 @@ services:
       - .:/var/myapp
       - ./output:/var/output
       - ./profiles.yml:/root/.dbt/profiles.yml
+    env_file: .env
     depends_on:
       - db
 

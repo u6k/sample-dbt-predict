@@ -1,11 +1,11 @@
 sample_dbt:
-  target: dev
+  target: prd
   outputs:
-    dev:
+    prd:
       type: postgres
       host: db
-      user: db_user
-      password: db_password
+      user: "{{ env_var('POSTGRES_USER') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD') }}"
       port: 5432
-      dbname: db_sample_dbt
+      dbname: "{{ env_var('POSTGRES_DB') }}"
       schema: public
